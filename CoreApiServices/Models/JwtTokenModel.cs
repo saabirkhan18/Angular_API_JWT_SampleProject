@@ -45,11 +45,18 @@ namespace CoreApiServices.Models
             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:Key"]));
             var signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
 
+            List<Claim> claims = new List<Claim> 
+            {
+                new Claim(ClaimTypes.Name,Username),
+                new Claim(ClaimTypes.Role,RoleName),
+            };
+
             var tokenOptions = new JwtSecurityToken(
                 issuer: Configuration["JWT:Issuer"],
                 audience: Configuration["JWT:Audience"],
                 claims: new List<Claim>(),
-                expires: DateTime.Now.AddMinutes(30),
+                //expires: DateTime.Now.AddMinutes(30),
+                expires: DateTime.Now.AddSeconds(10),
                 signingCredentials: signingCredentials
                 );
 
@@ -58,3 +65,4 @@ namespace CoreApiServices.Models
         }
     }
 }
+
