@@ -48,5 +48,13 @@ namespace CoreApiServices.Controllers
                 }
             }
         }
+
+
+        [HttpPost]
+        [Route("logout")]
+        public IActionResult Logout([FromBody] LoginModel user)
+        {
+            return Unauthorized();
+        }
     }
 }

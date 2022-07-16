@@ -14,11 +14,11 @@ export class LoginapiService {
       localStorage.setItem('jwt',(<any>res).token);
     });  
   }
-  async getData() {
+   getData() {
     let headers = new HttpHeaders();
     headers = headers.set('authorization', `Bearer ${localStorage.getItem('jwt')}`);
     headers = headers.set('content-type', 'application/json');
-   await this.http.get("http://localhost:25104/api/customer",{headers:headers}).subscribe(res => {      
+    this.http.get("http://localhost:25104/api/customer",{headers:headers}).subscribe(res => {      
     console.log(res);
       return res ;
     });  
