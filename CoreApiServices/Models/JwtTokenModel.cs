@@ -54,9 +54,9 @@ namespace CoreApiServices.Models
             var tokenOptions = new JwtSecurityToken(
                 issuer: Configuration["JWT:Issuer"],
                 audience: Configuration["JWT:Audience"],
-                claims: new List<Claim>(),
-                //expires: DateTime.Now.AddMinutes(30),
-                expires: DateTime.Now.AddSeconds(10),
+                claims: claims,
+                expires: DateTime.Now.AddMinutes(30),
+                //expires: DateTime.Now.AddSeconds(10),
                 signingCredentials: signingCredentials
                 );
 

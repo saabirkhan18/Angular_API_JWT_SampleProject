@@ -21,7 +21,7 @@ namespace CoreApiServices.Controllers
         //}
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles ="User")]
         public IActionResult Get()
         {
             List<Student> students = new List<Student>()

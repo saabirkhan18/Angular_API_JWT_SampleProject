@@ -47,7 +47,7 @@ namespace CoreApiServices.Controllers
 
                     //var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
                     JwtTokenModel jwtTokenModel = new JwtTokenModel(Configuration);
-                    return Ok(new { Token = jwtTokenModel.GetMyToken("saabir","Manager") });
+                    return Ok(new { Token = jwtTokenModel.GetMyToken("saabir", "User") });
                 }
                 else
                 {
