@@ -12,6 +12,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Text;
+using CoreApiServices.Models;
+
 namespace CoreApiServices
 {
     public class Startup
@@ -37,24 +39,26 @@ namespace CoreApiServices
                 });
             });
 
-            services.AddAuthentication(opt =>
-            {
-                opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
-                {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
+            //services.AddAuthentication(opt =>
+            //{
+            //    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            //}).AddJwtBearer(options =>
+            //{
+            //    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+            //    {
+            //        ValidateIssuer = true,
+            //        ValidateAudience = true,
+            //        ValidateLifetime = true,
+            //        ValidateIssuerSigningKey = true,
 
-                    ValidIssuer = "http://localhost:25104",
-                    ValidAudience = "http://localhost:25104",
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superseceretKey@345"))
-                };
-            });
+            //        ValidIssuer = Configuration["JWT:Issuer"],//"http://localhost:25104",
+            //        ValidAudience = Configuration["JWT:Audience"],//"http://localhost:25104",
+            //        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:Key"]))
+            //    };
+            //});
+            JwtTokenModel jwtTokenModel = new JwtTokenModel(Configuration);
+            jwtTokenModel.SetBearerTokenParam(services);
             services.AddControllers()
             //.AddJsonOptions(options =>
               // options.JsonSerializerOptions.PropertyNamingPolicy = null)
